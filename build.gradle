@@ -1,0 +1,54 @@
+defaultTasks 'build'
+apply plugin: 'application'
+mainClassName = "com.github.tkmtmkt.Main"
+
+allprojects {
+    group = 'com.github.tkmtmkt'
+    version = '1.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+        flatDir {
+            dirs "$rootDir/lib"
+        }
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    //apply plugin: 'checkstyle'
+    //apply plugin: 'findbugs'
+
+    def defaultEncoding = 'UTF-8'
+    [compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+
+    sourceCompatibility = '1.7'
+    targetCompatibility = '1.7'
+
+    dependencies {
+        compile 'org.scala-lang:scala-library:2.10.2'
+        compile 'org.slf4j:slf4j-log4j12:1.7.5'
+        compile name: 'coherence'
+        testCompile 'junit:junit:4.+'
+        testCompile 'org.mockito:mockito-core:1.9.5'
+    }
+
+    jar {
+        manifest {
+            attributes("Implementation-Title": project.name,
+                       "Implementation-Version": version)
+        }
+    }
+}
+
+dependencies {
+    runtime project(':appMain')
+    runtime project(':appData')
+}
+
+task wrapper(type: Wrapper) {
+    description = 'Generates Gradle wrapper scripts.'
+    gradleVersion = '1.6'
+}
+
+// vim: set ts=4 sw=4 et:

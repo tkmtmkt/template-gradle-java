@@ -1,0 +1,6 @@
+version = '1.0-SNAPSHOT'
+
+dependencies {
+    compile project(':appData')
+}
+// vim: set ts=4 sw=4 et:
