@@ -48,7 +48,7 @@ dependencies {
 
 task wrapper(type: Wrapper) {
     description = 'Generates Gradle wrapper scripts.'
-    gradleVersion = '1.6'
+    gradleVersion = '1.11'
 }
 
 // vim: set ts=4 sw=4 et:
