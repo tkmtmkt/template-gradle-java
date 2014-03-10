@@ -14,14 +14,18 @@ class BookTest {
 	public void testTitle() {
 		Book sut = new Book()
 
+		println "テスト１"
 		sut.setTitle("hoge")
 		assert sut.getTitle().equals("hoge1")
+
+		assert sut.title.equals("hoge")
 	}
 
 	@Test
 	public void testAuthor() {
 		Book sut = new Book()
 
+		println "テスト２"
 		sut.setAuthor("hoge")
 		assert sut.getAuthor().equals("hoge")
 	}
