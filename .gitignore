@@ -1,10 +1,15 @@
 *.class
+build/
+bin/
 
 # Package Files #
 *.jar
 *.war
 *.ear
 
+# eclipse workspace files
+.metadata/
+RemoteSystemsTempFiles/
+
+# gradle files
 .gradle/
-build/
-bin/
