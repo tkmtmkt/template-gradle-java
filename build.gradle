@@ -1,55 +1,101 @@
-defaultTasks 'build'
-apply plugin: 'application'
-mainClassName = "com.github.tkmtmkt.Main"
-
-allprojects {
-    group = 'com.github.tkmtmkt'
-    version = '1.0-SNAPSHOT'
-
-    repositories {
-        mavenCentral()
-        flatDir {
-            dirs "$rootDir/lib"
-        }
-    }
+task wrapper(type: Wrapper) {
+  description = 'Generates Gradle wrapper scripts.'
+  gradleVersion = '2.12'
 }
 
 subprojects {
-    apply plugin: 'java'
-    apply plugin: 'eclipse'
-    //apply plugin: 'checkstyle'
-    //apply plugin: 'findbugs'
+  apply plugin: 'java'
+  apply plugin: 'groovy'
+  apply plugin: 'checkstyle'
+  apply plugin: 'findbugs'
+  apply plugin: 'jdepend'
+  apply plugin: 'pmd'
+  apply plugin: 'jacoco'
+  apply plugin: 'eclipse'
 
-    def defaultEncoding = 'UTF-8'
-    [compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+  group = 'com.github.tkmtmkt'
+  version = '1.0-SNAPSHOT'
 
-    sourceCompatibility = '1.7'
-    targetCompatibility = '1.7'
+  defaultTasks 'assemble'
 
-    dependencies {
-        compile 'org.slf4j:slf4j-api:1.7.5'
-        compile name: 'coherence'
-        testCompile 'junit:junit:4.+'
-        testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
-        testCompile 'org.mockito:mockito-core:1.9.5'
+  repositories {
+    flatDir {
+      dirs "$rootDir/lib"
     }
+  }
 
-    jar {
-        manifest {
-            attributes("Implementation-Title": project.name,
-                       "Implementation-Version": version)
-        }
+  dependencies {
+    compile 'org.slf4j:slf4j-log4j12:1.7.21'
+    compile name: 'coherence'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+  }
+
+  def defaultEncoding = 'UTF-8'
+  [compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+  javadoc {
+    options.encoding = defaultEncoding
+    options.charSet(defaultEncoding)
+  }
+
+  sourceCompatibility = '1.8'
+  targetCompatibility = '1.8'
+
+  compileJava {
+    options.compilerArgs << '-Xlint:all'
+  }
+
+  jar {
+    manifest {
+      attributes("Implementation-Title": project.name,
+                 "Implementation-Version": version)
     }
-}
+  }
 
-dependencies {
-    runtime project(':appMain')
-    runtime project(':appData')
-}
+  checkstyle {
+    ignoreFailures = true
+    toolVersion = '6.14.1'
+    sourceSets = [sourceSets.main]
+    configFile = file("${rootProject.projectDir}/config/checkstyle/google_checks.xml")
+  }
 
-task wrapper(type: Wrapper) {
-    description = 'Generates Gradle wrapper scripts.'
-    gradleVersion = '2.12'
-}
+  findbugs {
+    ignoreFailures = true
+    toolVersion = '3.0.1'
+    sourceSets = [sourceSets.main]
+    effort = 'max'
+  }
 
-// vim: set ts=4 sw=4 et:
+  jdepend {
+    ignoreFailures = true
+    toolVersion = '2.9.1'
+    sourceSets = [sourceSets.main]
+  }
+
+  pmd {
+    ignoreFailures = true
+    toolVersion = '5.4.1'
+    sourceSets = [sourceSets.main]
+    ruleSets = ['java-basic', 'java-braces', 'java-strings']
+  }
+
+  test {
+    jacoco.append = false
+  }
+
+  jacoco {
+    toolVersion = '0.7.6.201602180812'
+  }
+  jacocoTestReport {
+    reports {
+      xml.enabled = true
+    }
+  }
+
+  task console(dependsOn: 'classes', type: JavaExec) {
+    description = 'Launch Groovy Console.'
+    main = 'groovy.ui.Console'
+    classpath = sourceSets.test.runtimeClasspath
+  }
+}
