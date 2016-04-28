@@ -1,5 +1,4 @@
 *.class
-build/
 bin/
 
 # Package Files #
@@ -13,3 +12,4 @@ RemoteSystemsTempFiles/
 
 # gradle files
 .gradle/
+build/
