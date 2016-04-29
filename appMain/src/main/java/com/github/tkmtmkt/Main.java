@@ -13,4 +13,3 @@ public class Main
         hoge.put("ISBN978-4-7741-4436-8", book);
     }
 }
-// vim: set ts=4 sw=4 et:

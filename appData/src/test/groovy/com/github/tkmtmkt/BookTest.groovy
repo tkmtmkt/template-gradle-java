@@ -6,28 +6,25 @@ package com.github.tkmtmkt;
 import org.junit.Test
 
 class BookTest {
+  /**
+   * PowerAssertの失敗表示を試す
+   */
+  @Test
+  public void testTitle() {
+    Book sut = new Book()
 
-	/**
-	 * PowerAssertの失敗表示を試す
-	 */
-	@Test
-	public void testTitle() {
-		Book sut = new Book()
+    println "テスト１"
+    sut.setTitle("hoge")
+    assert sut.title.equals("hoge")
+  }
 
-		println "テスト１"
-		sut.setTitle("hoge")
-		assert sut.getTitle().equals("hoge1")
+  @Test
+  public void testAuthor() {
+    Book sut = new Book()
 
-		assert sut.title.equals("hoge")
-	}
-
-	@Test
-	public void testAuthor() {
-		Book sut = new Book()
-
-		println "テスト２"
-		sut.setAuthor("hoge")
-		assert sut.getAuthor().equals("hoge")
-	}
+    println "テスト２"
+    sut.setAuthor("hoge")
+    assert sut.author.equals("hoge")
+  }
 
 }

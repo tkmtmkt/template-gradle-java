@@ -28,5 +28,3 @@ public class Book
         this.author = author;
     }
 }
-
-// vim: set ts=4 sw=4 et:
