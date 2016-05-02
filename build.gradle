@@ -1,9 +1,9 @@
-task wrapper(type: Wrapper) {
-  description = 'Generates Gradle wrapper scripts.'
-  gradleVersion = '2.12'
-}
-
 subprojects {
+  defaultTasks 'assemble'
+
+  group = 'com.github.tkmtmkt'
+  version = '1.0-SNAPSHOT'
+
   apply plugin: 'java'
   apply plugin: 'groovy'
   apply plugin: 'checkstyle'
@@ -12,11 +12,6 @@ subprojects {
   apply plugin: 'pmd'
   apply plugin: 'jacoco'
   apply plugin: 'eclipse'
-
-  group = 'com.github.tkmtmkt'
-  version = '1.0-SNAPSHOT'
-
-  defaultTasks 'assemble'
 
   repositories {
     flatDir {
@@ -98,4 +93,24 @@ subprojects {
     main = 'groovy.ui.Console'
     classpath = sourceSets.test.runtimeClasspath
   }
+}
+
+ext {
+  glassFishHome = "${System.properties['user.home']}/apps/glassfish4"
+  cmd = System.properties['os.name'].startsWith('Windows') ? 'asadmin.bat' : 'asadmin'
+  asadmin = "$glassFishHome/bin/$cmd"
+  domain = 'domain1'
+}
+
+task startServer(type: Exec) {
+  commandLine asadmin, 'start-domain', '--debug=true', domain
+}
+
+task stopServer(type: Exec) {
+  commandLine asadmin, 'stop-domain', domain
+}
+
+task wrapper(type: Wrapper) {
+  description = 'Generates Gradle wrapper scripts.'
+  gradleVersion = '2.12'
 }
