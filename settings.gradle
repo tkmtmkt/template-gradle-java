@@ -1,2 +1,11 @@
 include 'appMain'
 include 'appData'
+include 'integration'
+
+rootProject.name = 'template-gradle-java'
+rootProject.children.each {project ->
+    String projectDirName = "subprojects/${project.name}"
+    project.projectDir = new File(settingsDir, projectDirName)
+    assert project.projectDir.isDirectory()
+    assert project.buildFile.isFile()
+}

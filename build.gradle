@@ -57,7 +57,7 @@ subprojects {
     ignoreFailures = true
     toolVersion = '6.14.1'
     sourceSets = [sourceSets.main]
-    configFile = file("${rootProject.projectDir}/config/checkstyle/google_checks.xml")
+    configFile = file("$rootDir/config/checkstyle/google_checks.xml")
   }
 
   findbugs {

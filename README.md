@@ -1,6 +1,49 @@
 template-gradle-java
 ====================
 
+環境
+----
+
+    ~/apps/
+    ├─jdk1.8.0/
+    └─glassfish4/
+
+    ~/.gradle/
+    ├─gradle.properties
+    └─init.gradle
+
+    template-gradle-java/
+    ├─gradle/
+    │  └─wrapper/
+    │      ├─gradle-wrapper.jar
+    │      └─gradle-wrapper.properties
+    ├─gradlew
+    ├─gradlew.bat
+    ├─gradle.properties
+    ├─settings.gradle
+    ├─build.gradle
+    ├─config/
+    │  └─checkstyle/
+    │      └─google_checks.xml
+    ├─lib/
+    └─subprojects/
+        ├─appData/
+        │  ├─build.gradle
+        │  └─src/
+        │      ├─main/
+        │      │  ├─java/
+        │      │  └─resources/
+        │      └─test/
+        │          ├─gradle/
+        │          └─java/
+        ├─appMain
+        │  ├─build.gradle
+        │  └─src/
+        └─integration
+            ├─build.gradle
+            └─src/
+
+
 準備
 ----
 
