@@ -6,10 +6,9 @@ template-gradle-java
 
     ~/apps/
     ├─jdk1.8.0/
-    └─glassfish4/
+    └─payara41/
 
     ~/.gradle/
-    ├─gradle.properties
     └─init.gradle
 
     template-gradle-java/
@@ -42,13 +41,6 @@ template-gradle-java
         └─integration
             ├─build.gradle
             └─src/
-
-`~/.gradle/gradle.properties`
-
-```jproperties
-org.gradle.daemon=true
-org.gradle.jvmargs=-Xms1024M -Xmx2048M -XX:MaxMetaspaceSize=200M -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
-```
 
 `~/.gradle/init.gradle`
 

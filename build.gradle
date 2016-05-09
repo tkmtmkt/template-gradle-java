@@ -96,7 +96,7 @@ subprojects {
 }
 
 ext {
-  glassFishHome = "${System.properties['user.home']}/apps/glassfish4"
+  glassFishHome = "${System.properties['user.home']}/apps/payara41"
   cmd = System.properties['os.name'].startsWith('Windows') ? 'asadmin.bat' : 'asadmin'
   asadmin = "$glassFishHome/bin/$cmd"
   domain = 'domain1'
