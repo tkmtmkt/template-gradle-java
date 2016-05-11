@@ -19,8 +19,10 @@ subprojects {
     }
   }
 
+  def glassFishHome = "${System.properties['user.home']}/apps/payara41"
   dependencies {
-    compile 'org.slf4j:slf4j-log4j12:1.7.21'
+    compile 'org.slf4j:slf4j-log4j12:1.7.21',
+            fileTree(dir: "$glassFishHome/glassfish/modules", include: '**/*.jar')
     testCompile 'junit:junit:4.12',
                 'org.spockframework:spock-core:1.0-groovy-2.4',
                 'org.mockito:mockito-core:1.10.19'

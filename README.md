@@ -47,16 +47,22 @@ template-gradle-java
 ```groovy
 startParameter.offline = false
 
-def proxyHost = "www.somehost.org"
-def proxyPort = "8080"
-System.setProperty("http.proxyHost", proxyHost)
-System.setProperty("http.proxyPort", proxyPort)
-System.setProperty("https.proxyHost", proxyHost)
-System.setProperty("https.proxyPort", proxyPort)
+if (!startParameter.offline) {
+  def proxyHost = "www.somehost.org"
+  def proxyPort = "8080"
+  System.setProperty("http.proxyHost", proxyHost)
+  System.setProperty("http.proxyPort", proxyPort)
+  System.setProperty("https.proxyHost", proxyHost)
+  System.setProperty("https.proxyPort", proxyPort)
+}
 
 allprojects {
   repositories {
-    jcenter()
+    if (!startParameter.offline) {
+      jcenter()
+    } else {
+      maven { url "file:///$gradle.gradleUserHomeDir/repositoryi/local" }
+    }
   }
 }
 ```
