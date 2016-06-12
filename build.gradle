@@ -6,6 +6,7 @@ subprojects {
 
   apply plugin: 'java'
   apply plugin: 'groovy'
+  apply plugin: 'scala'
   apply plugin: 'checkstyle'
   apply plugin: 'findbugs'
   apply plugin: 'jdepend'
@@ -21,10 +22,16 @@ subprojects {
 
   def glassFishHome = "${System.properties['user.home']}/apps/payara41"
   dependencies {
-    compile 'org.slf4j:slf4j-log4j12:1.7.21',
+    compile 'org.slf4j:slf4j-api:1.7.21',
+            'org.scala-lang:scala-library:2.11.8',
             fileTree(dir: "$glassFishHome/glassfish/modules", include: '**/*.jar')
+    runtime 'org.apache.logging.log4j:log4j-slf4j-impl:2.6',
+            'org.apache.logging.log4j:log4j-core:2.6',
+            'org.apache.logging.log4j:log4j-api:2.6',
+            'org.slf4j:slf4j-log4j12:1.7.21'
     testCompile 'junit:junit:4.12',
                 'org.spockframework:spock-core:1.0-groovy-2.4',
+                'org.specs2:specs2_2.11:3.7',
                 'org.mockito:mockito-core:1.10.19'
   }
 
