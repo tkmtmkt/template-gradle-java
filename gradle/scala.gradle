@@ -4,4 +4,3 @@ dependencies {
   compile 'org.scala-lang:scala-library:2.11.8'
   testCompile 'org.specs2:specs2_2.11:3.7'
 }
-

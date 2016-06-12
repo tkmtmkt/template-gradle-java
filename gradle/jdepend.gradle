@@ -1,0 +1,7 @@
+apply plugin: 'jdepend'
+
+jdepend {
+  ignoreFailures = true
+  toolVersion = '2.9.1'
+  sourceSets = [sourceSets.main]
+}

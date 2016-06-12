@@ -1,0 +1,8 @@
+apply plugin: 'checkstyle'
+
+checkstyle {
+  ignoreFailures = true
+  toolVersion = '6.14.1'
+  sourceSets = [sourceSets.main]
+  configFile = file("$rootDir/config/checkstyle/google_checks.xml")
+}

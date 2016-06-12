@@ -1,0 +1,8 @@
+apply plugin: 'pmd'
+
+pmd {
+  ignoreFailures = true
+  toolVersion = '5.4.1'
+  sourceSets = [sourceSets.main]
+  ruleSets = ['java-basic', 'java-braces', 'java-strings']
+}

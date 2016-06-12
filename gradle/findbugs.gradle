@@ -1,0 +1,8 @@
+apply plugin: 'findbugs'
+
+findbugs {
+  ignoreFailures = true
+  toolVersion = '3.0.1'
+  sourceSets = [sourceSets.main]
+  effort = 'max'
+}

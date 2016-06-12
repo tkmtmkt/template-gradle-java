@@ -6,13 +6,8 @@ subprojects {
 
   apply plugin: 'java'
   apply plugin: 'groovy'
-  apply plugin: 'checkstyle'
-  apply plugin: 'findbugs'
-  apply plugin: 'jdepend'
-  apply plugin: 'pmd'
-  apply plugin: 'jacoco'
   apply plugin: 'eclipse'
-  fileTree(dir: 'gradle', includes: ['*.gradle']).each { apply from: it }
+  fileTree(dir: "$rootDir/gradle", includes: ['*.gradle']).each { apply from: it }
 
   repositories {
     flatDir {
@@ -20,10 +15,8 @@ subprojects {
     }
   }
 
-  def glassFishHome = "${System.properties['user.home']}/apps/payara41"
   dependencies {
-    compile 'org.slf4j:slf4j-api:1.7.21',
-            fileTree(dir: "$glassFishHome/glassfish/modules", include: '**/*.jar')
+    compile 'org.slf4j:slf4j-api:1.7.21'
     runtime 'org.apache.logging.log4j:log4j-slf4j-impl:2.6',
             'org.apache.logging.log4j:log4j-core:2.6',
             'org.apache.logging.log4j:log4j-api:2.6',
@@ -52,46 +45,6 @@ subprojects {
     manifest {
       attributes("Implementation-Title": project.name,
                  "Implementation-Version": version)
-    }
-  }
-
-  checkstyle {
-    ignoreFailures = true
-    toolVersion = '6.14.1'
-    sourceSets = [sourceSets.main]
-    configFile = file("$rootDir/config/checkstyle/google_checks.xml")
-  }
-
-  findbugs {
-    ignoreFailures = true
-    toolVersion = '3.0.1'
-    sourceSets = [sourceSets.main]
-    effort = 'max'
-  }
-
-  jdepend {
-    ignoreFailures = true
-    toolVersion = '2.9.1'
-    sourceSets = [sourceSets.main]
-  }
-
-  pmd {
-    ignoreFailures = true
-    toolVersion = '5.4.1'
-    sourceSets = [sourceSets.main]
-    ruleSets = ['java-basic', 'java-braces', 'java-strings']
-  }
-
-  test {
-    jacoco.append = false
-  }
-
-  jacoco {
-    toolVersion = '0.7.6.201602180812'
-  }
-  jacocoTestReport {
-    reports {
-      xml.enabled = true
     }
   }
 

@@ -1,0 +1,9 @@
+configurations {
+  glassfish
+}
+
+def glassFishHome = "${System.properties['user.home']}/apps/payara41"
+
+dependencies {
+  glassfish fileTree(dir: "$glassFishHome/glassfish/modules", include: '**/*.jar')
+}
